@@ -71,7 +71,8 @@ mx8mn-flavorlist = \
 
 mx8mp-flavorlist = \
 	mx8mpevk \
-	mx8mp_rsb3720_6g
+	mx8mp_rsb3720_6g \
+	mx8mp_simpad2p
 
 mx8qm-flavorlist = \
 	mx8qmmek \
@@ -398,6 +399,12 @@ CFG_DDR_SIZE ?= UL(0x180000000)
 CFG_UART_BASE ?= UART2_BASE
 $(call force,CFG_CORE_LARGE_PHYS_ADDR,y)
 $(call force,CFG_CORE_ARM64_PA_BITS,36)
+endif
+
+ifneq (,$(filter $(PLATFORM_FLAVOR),mx8mp_simpad2p))
+CFG_DDR_SIZE ?= UL(0x80000000)
+CFG_UART_BASE ?= UART2_BASE
+CFG_TZDRAM_START ?= 0xBE000000
 endif
 
 ifneq (,$(filter $(PLATFORM_FLAVOR),mx8mp_rsb3720_6g))
